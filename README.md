@@ -1,5 +1,14 @@
-🚗 BMW Used Cars — Exploratory Data Analysis (EDA)
-This project explores a dataset of BMW used cars to uncover pricing patterns, performance characteristics, and model‑specific insights. The analysis includes data cleaning, summary statistics, distributions, correlation analysis, and boxplots.
+📘 Project Scenario
+A small business owner needs to help him understand his current inventory database of used BMW cars. His main question was straightforward but strategically important:
+“Should I focus on acquiring more Diesel cars or Gasoline cars for the next quarter?”
+
+To answer this, a full Exploratory Data Analysis (EDA) of his dataset, focusing specifically on:
+- Mileage (how used the cars are)
+- Fuel type (Diesel vs Gasoline)
+- Market activity (which combinations appear more often, indicating higher demand)
+  
+This analysis helps the business owner make data‑driven purchasing decisions for the upcoming quarter.
+
 📁 Dataset
 The dataset contains BMW car listings with variables such as:
 - Model
@@ -49,4 +58,5 @@ Two types:
 - Scatterplot matrix with histograms (GGally::ggpairs)
 6. Boxplots
 - Boxplots for each numeric variable
-- Boxplots of numeric variables by BMW model
+- Boxplots of numeric variables by fuel type
+7. Dive on Milage and Fuel Type 
