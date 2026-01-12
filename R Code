@@ -124,3 +124,55 @@ for (v in num_vars) {
       theme_minimal()
   )
 }
+
+
+#Dive into mileage + price+ fuel type
+###Statistical Test
+cor.test(bmw$mileage, bmw$price, use = "complete.obs")
+
+bmw$fuel_binary <- ifelse(bmw$fuel_type == "Diesel", 1, 0)
+cor.test(bmw$mileage, bmw$fuel_binary, use = "complete.obs")
+
+cor.test(bmw$price, bmw$fuel_binary, use = "complete.obs")
+
+
+#Listings 
+
+ggplot(bmw, aes(x = fuel_type)) +
+  geom_bar(fill = "blue") +
+  labs(title = "Number of Listings by Fuel Type",
+       x = "Fuel Type", y = "Count") +
+  theme_minimal()
+
+bmw2 <- bmw %>%
+  filter(fuel_type %in% c("Diesel", "Petrol"))
+
+#Does Mileage differ by fuel type?
+t.test(mileage ~ fuel_type, data = bmw2)
+#Does price differ by fuel type?
+t.test(price ~ fuel_type, data = bmw2)
+
+ggplot(bmw, aes(x = fuel_type, y = mileage)) +
+  geom_boxplot(fill = "lightgrey", alpha = 0.7) +
+  coord_flip() +
+  labs(title = "Mileage Distribution by Fuel Type",
+       x = "Fuel Type", y = "Mileage") + theme_minimal()
+
+ggplot(bmw, aes(x = fuel_type, y = price)) +
+  geom_boxplot(fill = "purple", alpha = 0.7) +
+  coord_flip() +
+  labs(title = "Price Distribution by Fuel Type",
+       x = "Fuel Type", y = "Price") + theme_minimal()
+
+bmw %>%
+  mutate(mileage_group = cut(
+    mileage,
+    breaks = c(0, 20000, 40000, 60000, 80000, 100000, Inf),
+    labels = c("0–20k", "20–40k", "40–60k", "60–80k", "80–100k", "100k+")
+  )) %>%
+  count(fuel_type, mileage_group) %>%
+  ggplot(aes(x = mileage_group, y = fuel_type, fill = n)) +
+  geom_tile() +
+  scale_fill_gradient(low = "lightblue", high = "darkblue") +
+  labs(title = "Market Activity: Mileage × Fuel Type",
+       x = "Mileage Group", y = "Fuel Type", fill = "Listings") + theme_minimal()
