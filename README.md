@@ -59,4 +59,4 @@ Two types:
 6. Boxplots
 - Boxplots for each numeric variable
 - Boxplots of numeric variables by fuel type
-7. Dive on Milage and Fuel Type 
+7. Dive on Mileage and Fuel Type 
