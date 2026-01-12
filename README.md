@@ -26,8 +26,8 @@ The analysis is performed in R Studio using:
 📊 Analysis Steps
 1. Data Loading & Cleaning
 - Import CSV
-- Clean column names
-- Inspect structure and missing values
+- Clean column names (not need in this case)
+- Inspect structure and missing values (no missing values, which is not common)
 2. Summary Statistics
 For each numeric variable:
 - Mean
