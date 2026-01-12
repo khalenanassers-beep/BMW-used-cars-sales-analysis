@@ -1,0 +1,126 @@
+# Core
+library(tidyverse)
+library(janitor)
+library(haven) 
+library(readxl) 
+
+# Summaries
+library(skimr)
+library(summarytools)
+
+# Visuals
+library(GGally)
+library(corrplot)
+library(ggridges)
+
+# Load dataset
+bmw <- read_csv("") %>% 
+  clean_names()
+
+#Understand table structure
+list(
+  rows = nrow(bmw),
+  columns = ncol(bmw),
+  column_names = names(bmw),
+  types = sapply(bmw, class)
+)
+
+glimpse(bmw)
+
+#Check for missing values
+colSums(is.na(bmw))
+
+#Summary Statistics (Location & Spread)
+
+summary_table <- bmw %>%
+  select(where(is.numeric)) %>%
+  pivot_longer(everything(), names_to = "variable", values_to = "value") %>%
+  group_by(variable) %>%
+  summarise(
+    mean = mean(value, na.rm = TRUE),
+    median = median(value, na.rm = TRUE),
+    mode = {
+      ux <- unique(value)
+      ux[which.max(tabulate(match(value, ux)))]
+    },
+    variance = var(value, na.rm = TRUE),
+    range = diff(range(value, na.rm = TRUE)),
+    sd = sd(value, na.rm = TRUE)
+  )
+
+summary_table
+
+#Distributions (numeric data)
+num_vars <- bmw %>% select(where(is.numeric)) %>% names()
+
+for (v in num_vars) {
+  print(
+    ggplot(bmw, aes(.data[[v]])) +
+      geom_histogram(bins = 30, fill = "steelblue", alpha = 0.7) +
+      labs(title = paste("Distribution of", v))
+  )
+}
+
+#Categorical data
+cat_vars <- bmw %>% select(where(is.character)) %>% names()
+
+for (v in cat_vars) {
+  print(
+    bmw %>%
+      count(.data[[v]]) %>%
+      ggplot(aes(x = reorder(.data[[v]], n), y = n)) +
+      geom_col(fill = "darkgreen") +
+      coord_flip() +
+      labs(title = paste("Counts of", v), x = v, y = "Count")
+  )
+}
+
+#Correlation
+num_df <- bmw %>% select(where(is.numeric))
+
+corrplot(
+  cor(num_df, use = "pairwise.complete.obs"),
+  method = "color",
+  tl.col = "black",
+  tl.srt = 45,
+  tl.cex = 0.8
+)
+
+ggpairs(
+  num_df,
+  title = "Correlation Matrix — BMW Dataset",
+  upper = list(continuous = wrap("cor", size = 4)),
+  lower = list(continuous = wrap("smooth", colour = "magenta")),
+  diag = list(continuous = wrap("barDiag", fill = "lightblue"))
+)
+
+#Boxplots
+
+num_vars <- bmw %>% select(where(is.numeric)) %>% names()
+
+for (v in num_vars) {
+  print(
+    ggplot(bmw, aes(y = .data[[v]])) +
+      geom_boxplot(fill = "steelblue", alpha = 0.7) +
+      labs(
+        title = paste("Boxplot of", v),
+        y = v
+      ) +
+      theme_minimal()
+  )
+}
+
+
+for (v in num_vars) {
+  print(
+    ggplot(bmw, aes(x = model, y = .data[[v]])) +
+      geom_boxplot(fill = "darkgreen", alpha = 0.7) +
+      coord_flip() +
+      labs(
+        title = paste("Boxplot of", v, "by BMW Model"),
+        x = "Model",
+        y = v
+      ) +
+      theme_minimal()
+  )
+}
