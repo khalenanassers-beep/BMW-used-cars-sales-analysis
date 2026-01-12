@@ -14,7 +14,7 @@ The dataset contains BMW car listings with variables such as:
 Source: Kaggle dataset (https://www.kaggle.com/datasets/thedrzee/bmw-carsdataset?resource=download)
 
 🔧 Tools & Libraries
-The analysis is performed in R using:
+The analysis is performed in R Studio using:
 - tidyverse
 - janitor
 - skimr
