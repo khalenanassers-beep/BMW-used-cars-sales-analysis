@@ -56,8 +56,6 @@ The analysis shows a very clear pattern in how Diesel and Petrol BMWs behave in 
 ## **7. Recommendation**
 
 Based on the statistical tests and visual analysis:
-
-Based on the statistical tests and visual analysis:
 - If the business owner wants higher‑value, lower‑mileage inventory, the focus should be on Petrol (Gasoline) BMWs. When considering this option, it’s important to look at how saturated the local market currently is and whether Petrol supply remains stable.
 - If the goal is lower acquisition cost and serving long‑distance drivers, Diesel remains a viable niche. This works well if customers are looking for more affordable cars and if Diesel supply continues to be reliable.
 - It’s also worth reviewing the performance of electric and hybrid cars; if they tend to move slowly, it may be better to keep the main focus on the two strongest fuel types and only stock small quantities of others.
