@@ -53,7 +53,7 @@ The analysis shows a very clear pattern in how Diesel and Petrol BMWs behave in 
 
 ---
 
-## **7. Recommendation**
+## **Recommendation**
 
 Based on the analysis:
 - If the business owner wants higher‑value, lower‑mileage inventory, the focus should be on Petrol (Gasoline) BMWs. When considering this option, it’s important to look at how saturated the local market currently is and whether Petrol supply remains stable.
